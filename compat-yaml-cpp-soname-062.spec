@@ -10,6 +10,7 @@ Source0  : https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.6.2.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
+Requires: compat-yaml-cpp-soname-062-lib = %{version}-%{release}
 BuildRequires : binutils-dev
 BuildRequires : buildreq-cmake
 BuildRequires : doxygen
@@ -49,6 +50,14 @@ Patch3: 0002-Fix-stack-overflow-807.patch
 %description
 # yaml-cpp [![Build Status](https://travis-ci.org/jbeder/yaml-cpp.svg?branch=master)](https://travis-ci.org/jbeder/yaml-cpp) [![Documentation](https://codedocs.xyz/jbeder/yaml-cpp.svg)](https://codedocs.xyz/jbeder/yaml-cpp/)
 
+%package lib
+Summary: lib components for the compat-yaml-cpp-soname-062 package.
+Group: Libraries
+
+%description lib
+lib components for the compat-yaml-cpp-soname-062 package.
+
+
 %prep
 %setup -q -n yaml-cpp-yaml-cpp-0.6.2
 cd %{_builddir}/yaml-cpp-yaml-cpp-0.6.2
@@ -62,7 +71,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1643684504
+export SOURCE_DATE_EPOCH=1643684636
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -191,7 +200,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1643684504
+export SOURCE_DATE_EPOCH=1643684636
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
@@ -334,6 +343,55 @@ rm -f %{buildroot}*/usr/lib/libgtest_main.so
 rm -f %{buildroot}*/usr/share/package-licenses/yaml-cpp/test_gtest-1.8.0_googlemock_LICENSE
 rm -f %{buildroot}*/usr/share/package-licenses/yaml-cpp/test_gtest-1.8.0_googlemock_scripts_generator_LICENSE
 rm -f %{buildroot}*/usr/share/package-licenses/yaml-cpp/test_gtest-1.8.0_googletest_LICENSE
+rm -f %{buildroot}*/usr/include/yaml-cpp/anchor.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/binary.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/contrib/anchordict.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/contrib/graphbuilder.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/depthguard.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/dll.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/emitfromevents.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/emitter.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/emitterdef.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/emittermanip.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/emitterstyle.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/eventhandler.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/exceptions.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/mark.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/convert.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/bool_type.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/impl.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/iterator.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/iterator_fwd.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/memory.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/node.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/node_data.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/node_iterator.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/detail/node_ref.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/emit.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/impl.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/iterator.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/node.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/parse.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/ptr.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/node/type.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/noncopyable.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/null.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/ostream_wrapper.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/parser.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/stlemitter.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/traits.h
+rm -f %{buildroot}*/usr/include/yaml-cpp/yaml.h
+rm -f %{buildroot}*/usr/lib64/cmake/yaml-cpp/yaml-cpp-config-version.cmake
+rm -f %{buildroot}*/usr/lib64/cmake/yaml-cpp/yaml-cpp-config.cmake
+rm -f %{buildroot}*/usr/lib64/cmake/yaml-cpp/yaml-cpp-targets-release.cmake
+rm -f %{buildroot}*/usr/lib64/cmake/yaml-cpp/yaml-cpp-targets.cmake
+rm -f %{buildroot}*/usr/lib64/libyaml-cpp.so
+rm -f %{buildroot}*/usr/lib64/pkgconfig/yaml-cpp.pc
 
 %files
 %defattr(-,root,root,-)
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libyaml-cpp.so.0.6
+/usr/lib64/libyaml-cpp.so.0.6.2
